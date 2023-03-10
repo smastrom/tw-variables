@@ -44,7 +44,7 @@ test('Besides font-family and preflight, any CSS property should not contain quo
    )
 
    for await (const cssImport of cssImports) {
-      const cssFile = await Bun.file(cssImport.import)
+      const cssFile = Bun.file(cssImport.import)
       const cssText = await cssFile.text()
 
       expect(cssText).not.toContain('"')
@@ -72,10 +72,10 @@ test('All exports import from dist', () => {
 
 test('All exports exist', async () => {
    for await (const { import: _import, require: _require } of exports) {
-      const fileMjs = await Bun.file(_import)
+      const fileMjs = Bun.file(_import)
       expect(fileMjs.size > 0).toBe(true)
 
-      const fileCjs = await Bun.file(_require)
+      const fileCjs = Bun.file(_require)
       expect(fileCjs.size > 0).toBe(true)
    }
 })
