@@ -98,7 +98,9 @@
   "types": "dist/variables.d.ts",
   "style": "dist/variables.css",
   "scripts": {
-    "build": "rm -rf dist && mkdir dist && bun run index.js"
+    "build": "rm -rf dist && mkdir dist && bun run index.js",
+    "postbuild": "bun test",
+    "test": "bun test"
   },
   "devDependencies": {
     "bun": "^0.5.7",
