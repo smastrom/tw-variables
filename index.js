@@ -50,25 +50,25 @@ const colorEntries = Object.entries(twColors).filter(
    ([colorName]) => !deprecatedColors.includes(colorName)
 )
 
-for (const [colorName, colorValue] of colorEntries) {
+for (const [_colorName, variantColors] of colorEntries) {
    const currColors = []
 
-   if (isObj(colorValue)) {
+   if (isObj(variantColors)) {
       // { amber: { 50: value, 100: value, ... }}
-      const currName = normalize(colorName) // Used as file name as well
-      const currObj = Object.entries(colorValue)
+      const colorName = normalize(_colorName) // Used as file name as well
+      const currVariants = Object.entries(variantColors)
 
-      if (isDeepArr(currObj)) {
-         for (const [numericVariant, variantValue] of currObj) {
+      if (isDeepArr(currVariants)) {
+         for (const [numericVariant, value] of currVariants) {
             const _var = {
-               [`--${currName}-${numericVariant}`]: variantValue,
+               [`--${colorName}-${numericVariant}`]: value,
             }
 
             currColors.push(_var)
             allColors.push(_var)
          }
 
-         varsMap.set(currName, currColors)
+         varsMap.set(colorName, currColors)
       }
    }
 }
