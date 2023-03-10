@@ -1,7 +1,8 @@
 {
   "name": "tw-variables",
-  "private": false,
   "version": "3.2.7",
+  "private": false,
+  "description": "400 useful CSS variables generated straight from Tailwind source files.",
   "keywords": [
     "tailwind",
     "tailwindcss",
@@ -10,6 +11,14 @@
     "css-variables",
     "tw-variables"
   ],
+  "homepage": "https://github.com/smastrom/tw-variables",
+  "bugs": {
+    "url": "https://github.com/smastrom/tw-variables/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smastrom/tw-variables.git"
+  },
   "license": "MIT",
   "author": {
     "name": "Simone Mastromattei",
@@ -97,6 +106,9 @@
   "module": "dist/variables.mjs",
   "types": "dist/variables.d.ts",
   "style": "dist/variables.css",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
     "build": "rm -rf dist && mkdir dist && bun run index.js",
     "postbuild": "bun test",
