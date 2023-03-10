@@ -73,32 +73,32 @@ const outEntries = Array.from(outVars.entries()) // [['fileName', [{ '--name', v
 const outArr = Array.from(outVars.values()).flat(1 / 0) // [{ '--name': value }, ... ]
 const outObj = {}
 
-let outType = ''
+let outDts = ''
 
 for (const cssVar of outArr) {
    const [varName, varValue] = Object.entries(cssVar).flat(1 / 0)
    outObj[varName] = varValue
-   outType = outType + `'${varName}': string,`
+   outDts = outDts + `'${varName}': string,`
 }
 
-const outJs = JSON.stringify(outObj)
+const outJson = JSON.stringify(outObj)
 
-await Bun.write('./dist/variables.mjs', `export const twVariables = ${outJs}`)
-await Bun.write('./dist/variables.js', `module.exports = ${outJs}`)
-await Bun.write('./dist/variables.json', outJs)
+await Bun.write('./dist/variables.mjs', `export const twVariables = ${outJson}`)
+await Bun.write('./dist/variables.js', `module.exports = ${outJson}`)
+await Bun.write('./dist/variables.json', outJson)
 
-const types = `export declare const twVariables: TwVariables; export type TwVariables = { ${outType} }`
+const types = `export declare const twVariables: TwVariables; export type TwVariables = { ${outDts} }`
 await Bun.write('./dist/variables.d.ts', types)
 
 // Write one CSS file with separate :root blocks
 
-let _rootBlocks = ''
+let rootBlocks = ''
 
 for (const [, cssVars] of outEntries) {
-   _rootBlocks += getCSS(cssVars)
+   rootBlocks += getCSS(cssVars)
 }
 
-await Bun.write('./dist/variables.css', _rootBlocks)
+await Bun.write('./dist/variables.css', rootBlocks)
 
 // Write single CSS files
 
@@ -135,15 +135,15 @@ await Bun.write('./package.json', JSON.stringify(pkgObj, undefined, 2))
 
 function getCSS(cssVars) {
    const open = ':root {'
-   let _cssVars = ''
+   let strVars = ''
    const close = '}'
 
-   for (const _cssVar of cssVars) {
-      const [varName, varValue] = Object.entries(_cssVar).flat(1 / 0)
-      _cssVars += `${varName}: ${varValue};`
+   for (const cssVar of cssVars) {
+      const [varName, varValue] = Object.entries(cssVar).flat(1 / 0)
+      strVars += `${varName}: ${varValue};`
    }
 
-   return open + _cssVars + close
+   return open + strVars + close
 }
 
 // Utils - Default Theme
