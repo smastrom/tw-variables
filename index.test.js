@@ -2,6 +2,8 @@ import { expect, test } from 'bun:test'
 import { twVariables } from './dist/variables'
 import pkgJson from './package.json'
 
+// JS
+
 const keys = Object.keys(twVariables)
 
 test('No duplicated properties', () => {
@@ -25,12 +27,32 @@ test("Any key starts with '--'", () => {
 })
 
 test('Any key contains only hypens and letters', () => {
-   const keys = Object.keys(twVariables)
-
    for (const key of keys) {
       expect(/^[a-z0-9\-]+$/.test(key)).toBe(true)
    }
 })
+
+// CSS Files
+
+test('Besides font-family, any CSS property should not contain quotes or undefined', async () => {
+   const cssImports = exports.filter(
+      ({ import: _import }) =>
+         _import.endsWith('.css') &&
+         !_import.includes('font-family') &&
+         !_import.includes('variables')
+   )
+
+   for await (const cssImport of cssImports) {
+      const cssFile = await Bun.file(cssImport.import)
+      const cssText = await cssFile.text()
+
+      expect(cssText).not.toContain('"')
+      expect(cssText).not.toContain("'")
+      expect(cssText).not.toContain('undefined')
+   }
+})
+
+// PKG JSON
 
 const exports = Object.values(pkgJson.exports)
 
@@ -40,26 +62,26 @@ test('No dist in exports key', () => {
    }
 })
 
-test('Exports import from dist', () => {
-   for (const { import: _import, require } of exports) {
+test('All exports import from dist', () => {
+   for (const { import: _import, require: _require } of exports) {
       expect(_import.startsWith('./dist')).toBe(true)
-      expect(require.startsWith('./dist')).toBe(true)
+      expect(_require.startsWith('./dist')).toBe(true)
    }
 })
 
-test('Exports exist', async () => {
-   for await (const { import: _import, require } of exports) {
+test('All exports exist', async () => {
+   for await (const { import: _import, require: _require } of exports) {
       const fileMjs = await Bun.file(_import)
       expect(fileMjs.size > 0).toBe(true)
 
-      const fileCjs = await Bun.file(require)
+      const fileCjs = await Bun.file(_require)
       expect(fileCjs.size > 0).toBe(true)
    }
 })
 
-test('Exports have correct extensions', () => {
-   for (const { import: _import, require } of exports) {
+test('All exports have correct extensions', () => {
+   for (const { import: _import, require: _require } of exports) {
       expect(/\.css$|\.mjs$/.test(_import)).toBe(true)
-      expect(/\.css$|\.js$/.test(require)).toBe(true)
+      expect(/\.css$|\.js$/.test(_require)).toBe(true)
    }
 })
