@@ -28,13 +28,13 @@
       "import": "./dist/blur.css",
       "require": "./dist/blur.css"
     },
-    "./radius.css": {
-      "import": "./dist/radius.css",
-      "require": "./dist/radius.css"
+    "./border-radius.css": {
+      "import": "./dist/border-radius.css",
+      "require": "./dist/border-radius.css"
     },
-    "./border.css": {
-      "import": "./dist/border.css",
-      "require": "./dist/border.css"
+    "./border-width.css": {
+      "import": "./dist/border-width.css",
+      "require": "./dist/border-width.css"
     },
     "./shadow.css": {
       "import": "./dist/shadow.css",
@@ -68,21 +68,21 @@
       "import": "./dist/opacity.css",
       "require": "./dist/opacity.css"
     },
-    "./widths.css": {
-      "import": "./dist/widths.css",
-      "require": "./dist/widths.css"
+    "./width.css": {
+      "import": "./dist/width.css",
+      "require": "./dist/width.css"
     },
-    "./screens.css": {
-      "import": "./dist/screens.css",
-      "require": "./dist/screens.css"
+    "./screen.css": {
+      "import": "./dist/screen.css",
+      "require": "./dist/screen.css"
     },
-    "./sizes.css": {
-      "import": "./dist/sizes.css",
-      "require": "./dist/sizes.css"
+    "./size.css": {
+      "import": "./dist/size.css",
+      "require": "./dist/size.css"
     },
-    "./easings.css": {
-      "import": "./dist/easings.css",
-      "require": "./dist/easings.css"
+    "./easing.css": {
+      "import": "./dist/easing.css",
+      "require": "./dist/easing.css"
     },
     "./z-index.css": {
       "import": "./dist/z-index.css",

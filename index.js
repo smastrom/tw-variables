@@ -5,8 +5,8 @@ const outVars = new Map()
 
 const PROPS = [
    ['blur', 'blur', 'blur'],
-   ['borderRadius', 'radius', 'radius'],
-   ['borderWidth', 'border', 'border'],
+   ['borderRadius', 'radius', 'border-radius'],
+   ['borderWidth', 'border', 'border-width'],
    ['boxShadow', 'shadow', 'shadow'],
    ['dropShadow', 'drop-shadow', 'drop-shadow'],
    ['fontWeight', 'font', 'font-weight'],
@@ -15,10 +15,10 @@ const PROPS = [
    ['letterSpacing', 'tracking', 'letter-spacing'],
    ['lineHeight', 'leading', 'line-height'],
    ['opacity', 'opacity', 'opacity'],
-   ['maxWidth', 'width', 'widths'],
-   ['screens', 'screen', 'screens'],
-   ['spacing', 'size', 'sizes'],
-   ['transitionTimingFunction', 'easing', 'easings'],
+   ['maxWidth', 'width', 'width'],
+   ['screens', 'screen', 'screen'],
+   ['spacing', 'size', 'size'],
+   ['transitionTimingFunction', 'easing', 'easing'],
    ['zIndex', 'z', 'z-index'],
 ]
 

@@ -20,7 +20,7 @@ pnpm install -D tw-variables
 
 <br />
 
-## Usage - CSS
+## Import - CSS
 
 Import all variables:
 
@@ -37,9 +37,9 @@ import 'tw-variables/size.css'
 
 <br />
 
-## Usage - PostCSS
+## Import - PostCSS
 
-You can use this package in conjunction with `postcss-jit-props` to strip unused variables from the final CSS.
+You can use this package in conjunction with [postcss-jit-props](https://github.com/GoogleChromeLabs/postcss-jit-props) to strip unused variables from the final CSS:
 
 ```bash
 pnpm add -D postcss postcss-jit-props
@@ -78,46 +78,57 @@ module.exports = {
 
 <br />
 
-## Subsets
-
-| Subset                     | Prefix        | Import                                               |
-| -------------------------- | ------------- | ---------------------------------------------------- |
-| `blur`                     | `--blur-`     | `import tw-variables/blur.css`                       |
-| `borderRadius`             | `--radius-`   | `import tw-variables/border-radius.css`              |
-| `borderWidth`              | `--border-`   | `import tw-variables/border-width.css`               |
-| `boxShadow`                | `--shadow-`   | `import tw-variables/box-shadow.css`                 |
-| `dropShadow`               | `--drop-`     | `import tw-variables/drop-shadow.css`                |
-| `fontWeight`               | `--font-`     | `import tw-variables/font-weight.css`                |
-| `fontFamily`               | `--family-`   | `import tw-variables/font-family.css`                |
-| `fontSize`                 | `--text-`     | `import tw-variables/font-size.css`                  |
-| `letterSpacing`            | `--tracking-` | `import tw-variables/letter-spacing.css`             |
-| `lineHeight`               | `--leading-`  | `import tw-variables/line-height.css`                |
-| `opacity`                  | `--opacity-`  | `import tw-variables/opacity.css`                    |
-| `maxWidth`                 | `--max-w-`    | `import tw-variables/max-width.css`                  |
-| `screens`                  | `--screen-`   | `import tw-variables/screens.css`                    |
-| `spacing`                  | `--size-`     | `import tw-variables/spacing.css`                    |
-| `transitionTimingFunction` | `--easing-`   | `import tw-variables/transition-timing-function.css` |
-| `zIndex`                   | `--z-`        | `import tw-variables/z-index.css`                    |
-| `colors`                   | See below     | `import tw-variables/colors.css`                     |
-
-Colors:
-
-```js
-import 'tw-variables/colors.css'
-```
+## Usage
 
 ```css
-.MyClass {
+.my-container {
+   width: var(--width-full);
+   max-width: var(--width-xl);
+   z-index: var(--z-10);
+   padding: var(--size-4);
+   margin: var(--size-6);
+   font-family: var(--family-sans);
+   font-size: var(--text-base);
+   font-weight: var(--font-medium);
+   line-height: var(--leading-normal);
+   letter-spacing: var(--tracking-tight);
    color: var(--blue-500);
-   background: var(--slate-50);
+   background-color: var(--slate-500);
+   border: var(--border-2) solid var(--blue-500);
+   border-radius: var(--radius-2xl);
+   box-shadow: var(--shadow-lg);
 }
 ```
 
 <br />
 
+## Subsets
+
+| CSS Property               | Prefix                   | Import                            | Reference                                                       |
+| -------------------------- | ------------------------ | --------------------------------- | --------------------------------------------------------------- |
+| `blur`                     | `--blur-`                | `tw-variables/blur.css`           | [Link](https://tailwindcss.com/docs/blur)                       |
+| `borderRadius`             | `--radius-`              | `tw-variables/border-radius.css`  | [Link](https://tailwindcss.com/docs/border-radius)              |
+| `borderWidth`              | `--border-`              | `tw-variables/border-width.css`   | [Link](https://tailwindcss.com/docs/border-width)               |
+| `boxShadow`                | `--shadow-`              | `tw-variables/box-shadow.css`     | [Link](https://tailwindcss.com/docs/box-shadow)                 |
+| `colors`                   | `--blue-`, `--slate-`... | `tw-variables/colors.css`         | [Link](https://tailwindcss.com/docs/customizing-colors)         |
+| `dropShadow`               | `--drop-`                | `tw-variables/drop-shadow.css`    | [Link](https://tailwindcss.com/docs/drop-shadow)                |
+| `fontWeight`               | `--font-`                | `tw-variables/font-weight.css`    | [Link](https://tailwindcss.com/docs/font-weight)                |
+| `fontFamily`               | `--family-`              | `tw-variables/font-family.css`    | [Link](https://tailwindcss.com/docs/font-family)                |
+| `fontSize`                 | `--text-`                | `tw-variables/font-size.css`      | [Link](https://tailwindcss.com/docs/font-size)                  |
+| `letterSpacing`            | `--tracking-`            | `tw-variables/letter-spacing.css` | [Link](https://tailwindcss.com/docs/letter-spacing)             |
+| `lineHeight`               | `--leading-`             | `tw-variables/line-height.css`    | [Link](https://tailwindcss.com/docs/line-height)                |
+| `opacity`                  | `--opacity-`             | `tw-variables/opacity.css`        | [Link](https://tailwindcss.com/docs/opacity)                    |
+| `maxWidth`                 | `--width-`               | `tw-variables/width.css`          | [Link](https://tailwindcss.com/docs/max-width)                  |
+| `screens`                  | `--screen-`              | `tw-variables/screen.css`         | [Link](https://tailwindcss.com/docs/theme#screens)              |
+| `spacing`                  | `--size-`                | `tw-variables/size.css`           | [Link](https://tailwindcss.com/docs/padding)                    |
+| `transitionTimingFunction` | `--easing-`              | `tw-variables/easing.css`         | [Link](https://tailwindcss.com/docs/transition-timing-function) |
+| `zIndex`                   | `--z-`                   | `tw-variables/z-index.css`        | [Link](https://tailwindcss.com/docs/z-index)                    |
+
+<br />
+
 ## Check also
 
-[Open Props](https://openprops.dev) by _Adam Argyle_
+[Open Props](https://github.com/argyleink/open-props) by _Adam Argyle_
 
 <br />
 
