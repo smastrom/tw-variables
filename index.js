@@ -1,9 +1,9 @@
 import { theme } from 'tailwindcss/stubs/defaultConfig.stub.js'
 import twColors from 'tailwindcss/lib/public/colors.js'
 
-const outVars = new Map()
+const varsMap = new Map()
 
-const PROPS = [
+const configProps = [
    ['blur', 'blur', 'blur'],
    ['borderRadius', 'radius', 'border-radius'],
    ['borderWidth', 'border', 'border-width'],
@@ -22,13 +22,13 @@ const PROPS = [
    ['zIndex', 'z', 'z-index'],
 ]
 
-// Default Theme
+// Default Config
 
-for (const PROP of PROPS) {
-   const [srcProp, cssPrefix, fileName] = PROP
-   const currProps = []
+for (const prop of configProps) {
+   const [srcProp, cssPrefix, fileName] = prop
 
    const currEntries = Object.entries(getThemeProp(theme[srcProp]))
+   const currProps = []
 
    for (const [variant, value] of currEntries) {
       if (variant.toLowerCase() !== 'default') {
@@ -38,7 +38,7 @@ for (const PROP of PROPS) {
       }
    }
 
-   outVars.set(fileName, currProps)
+   varsMap.set(fileName, currProps)
 }
 
 // Colors
@@ -68,20 +68,20 @@ for (const [colorName, colorValue] of colorEntries) {
             allColors.push(_var)
          }
 
-         outVars.set(currName, currColors)
+         varsMap.set(currName, currColors)
       }
    }
 }
 
 // Write JS
 
-const outEntries = Array.from(outVars.entries()) // [['fileName', [{ '--name', value }, ... ]]]
-const outArr = Array.from(outVars.values()).flat(1 / 0) // [{ '--name': value }, ... ]
+const outEntries = Array.from(varsMap.entries()) // [['fileName', [{ '--name', value }, ... ]]]
+const outVarsArr = Array.from(varsMap.values()).flat(1 / 0) // [{ '--name': value }, ... ]
 const outObj = {}
 
 let outDts = ''
 
-for (const cssVar of outArr) {
+for (const cssVar of outVarsArr) {
    const [varName, varValue] = Object.entries(cssVar).flat(1 / 0)
    outObj[varName] = varValue
    outDts = outDts + `'${varName}': string,`
@@ -93,7 +93,7 @@ await Bun.write('./dist/index.mjs', `export const twVariables = ${outJson}`)
 await Bun.write('./dist/index.js', `module.exports = ${outJson}`)
 await Bun.write('./dist/variables.json', outJson)
 
-// Write D.TS
+// Write d.ts
 
 const types = `export declare const twVariables: TwVariables; export type TwVariables = { ${outDts} }`
 await Bun.write('./dist/index.d.ts', types)
@@ -126,16 +126,16 @@ await Bun.write('./dist/preflight.css', cleanPreflight(pfText))
 // Package.json
 
 const pkgText = await Bun.file('./package.json').text()
-const pkgObj = JSON.parse(pkgText)
-
 await Bun.write('./package-bk.json', pkgText)
 
-// - JS
+const pkgObj = JSON.parse(pkgText)
+
+// --- JS
 
 pkgObj.exports = {}
 pkgObj.exports['.'] = { import: './dist/index.mjs', require: './dist/index.js' }
 
-// - Unified CSS files
+// --- Unified CSS files
 
 pkgObj.exports['./preflight.css'] = {
    import: './dist/preflight.css',
@@ -152,7 +152,7 @@ pkgObj.exports['./colors.css'] = {
    require: './dist/colors.css',
 }
 
-// - Separated CSS files
+// --- Separated CSS files
 
 for (const [fileName] of outEntries) {
    const path = `./dist/${fileName}.css`
@@ -161,7 +161,7 @@ for (const [fileName] of outEntries) {
 
 await Bun.write('./package.json', JSON.stringify(pkgObj, undefined, 2))
 
-// Utils - Default Theme
+// Value getters
 
 function getThemeProp(prop) {
    if (typeof prop === 'function') {
@@ -192,29 +192,7 @@ function joinOrGetValue(values) {
    return ''
 }
 
-// Misc
-
-function normalize(value) {
-   return camelToKebab(value).toLowerCase().replaceAll('.', '')
-}
-
-function camelToKebab(string) {
-   return string.replace(/[A-Z]/g, (match) => '-' + match)
-}
-
-function isDeepArr(array) {
-   return Array.isArray(array) && array.every((item) => Array.isArray(item))
-}
-
-function isString(value) {
-   return typeof value === 'string'
-}
-
-function isObj(value) {
-   return typeof value === 'object' && value !== null
-}
-
-// Utils - Write
+// Write Utils
 
 function getCSS(cssVars) {
    const open = ':root {'
@@ -235,4 +213,26 @@ function cleanPreflight(cssText) {
       .replace(/\b(?:\w+-)*theme\s*\(\s*(?:(?!\)).)*\)/g, '') // Remove properties with theme() fns
       .replace('--tw-content', 'content') // Replace tw-content
       .replace(/[\s\n]+/g, '') // Minify
+}
+
+// Misc
+
+function normalize(value) {
+   return camelToKebab(value).toLowerCase().replaceAll('.', '')
+}
+
+function camelToKebab(string) {
+   return string.replace(/[A-Z]/g, (match) => '-' + match)
+}
+
+function isDeepArr(array) {
+   return Array.isArray(array) && array.every((item) => Array.isArray(item))
+}
+
+function isString(value) {
+   return typeof value === 'string'
+}
+
+function isObj(value) {
+   return typeof value === 'object' && value !== null
 }
