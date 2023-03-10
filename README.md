@@ -76,6 +76,8 @@ module.exports = {
 }
 ```
 
+<br />
+
 ## Subsets
 
 | Subset                     | Prefix        | Import                                               |
@@ -116,3 +118,9 @@ import 'tw-variables/colors.css'
 ## Check also
 
 [Open Props](https://openprops.dev) by _Adam Argyle_
+
+<br />
+
+## License
+
+MIT
