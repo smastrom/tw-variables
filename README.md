@@ -1,6 +1,6 @@
 # Tailwind Variables
 
-~390 useful CSS variables generated straight from Tailwind source files.
+~400 useful CSS variables generated straight from Tailwind source files.
 
 <br />
 
@@ -104,7 +104,7 @@ module.exports = {
 
 ## Subsets
 
-| CSS Property               | Prefix                   | Import                            | Reference                                                       |
+| Tailwind Source            | Prefix                   | Import                            | Reference                                                       |
 | -------------------------- | ------------------------ | --------------------------------- | --------------------------------------------------------------- |
 | `blur`                     | `--blur-`                | `tw-variables/blur.css`           | [Link](https://tailwindcss.com/docs/blur)                       |
 | `borderRadius`             | `--radius-`              | `tw-variables/border-radius.css`  | [Link](https://tailwindcss.com/docs/border-radius)              |
