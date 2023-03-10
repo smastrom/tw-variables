@@ -73,7 +73,7 @@ for (const [colorName, colorValue] of colorEntries) {
    }
 }
 
-// Write JS / D.TS
+// Write JS
 
 const outEntries = Array.from(outVars.entries()) // [['fileName', [{ '--name', value }, ... ]]]
 const outArr = Array.from(outVars.values()).flat(1 / 0) // [{ '--name': value }, ... ]
@@ -93,10 +93,12 @@ await Bun.write('./dist/index.mjs', `export const twVariables = ${outJson}`)
 await Bun.write('./dist/index.js', `module.exports = ${outJson}`)
 await Bun.write('./dist/variables.json', outJson)
 
+// Write D.TS
+
 const types = `export declare const twVariables: TwVariables; export type TwVariables = { ${outDts} }`
 await Bun.write('./dist/index.d.ts', types)
 
-// Write all variables in one file in different root blocks:
+// Write all vars in a single CSS file in different root blocks:
 
 let rootBlocks = ''
 
@@ -106,20 +108,24 @@ for (const [, cssVars] of outEntries) {
 
 await Bun.write('./dist/variables.css', rootBlocks)
 
-// Write all colors in one file:
+// Write all colors in a single CSS file
 
 await Bun.write('./dist/colors.css', getCSS(allColors))
 
-// Write single CSS files
+// Write separated CSS files
 
 for await (const [fileName, cssVars] of outEntries) {
    await Bun.write(`./dist/${fileName}.css`, getCSS(cssVars))
 }
 
-// PKG JSON
+// Write preflight CSS file
 
-const pkgJson = await Bun.file('./package.json')
-const pkgText = await pkgJson.text()
+const pfText = await Bun.file('node_modules/tailwindcss/src/css/preflight.css').text()
+await Bun.write('./dist/preflight.css', cleanPreflight(pfText))
+
+// Package.json
+
+const pkgText = await Bun.file('./package.json').text()
 const pkgObj = JSON.parse(pkgText)
 
 await Bun.write('./package-bk.json', pkgText)
@@ -131,6 +137,11 @@ pkgObj.exports['.'] = { import: './dist/index.mjs', require: './dist/index.js' }
 
 // - Unified CSS files
 
+pkgObj.exports['./preflight.css'] = {
+   import: './dist/preflight.css',
+   require: './dist/preflight.css',
+}
+
 pkgObj.exports['./variables.css'] = {
    import: './dist/variables.css',
    require: './dist/variables.css',
@@ -141,7 +152,7 @@ pkgObj.exports['./colors.css'] = {
    require: './dist/colors.css',
 }
 
-// - Single CSS files
+// - Separated CSS files
 
 for (const [fileName] of outEntries) {
    const path = `./dist/${fileName}.css`
@@ -149,21 +160,6 @@ for (const [fileName] of outEntries) {
 }
 
 await Bun.write('./package.json', JSON.stringify(pkgObj, undefined, 2))
-
-// Utils - Write
-
-function getCSS(cssVars) {
-   const open = ':root {'
-   let strVars = ''
-   const close = '}'
-
-   for (const cssVar of cssVars) {
-      const [varName, varValue] = Object.entries(cssVar).flat(1 / 0)
-      strVars += `${varName}: ${varValue};`
-   }
-
-   return open + strVars + close
-}
 
 // Utils - Default Theme
 
@@ -188,7 +184,7 @@ function joinOrGetValue(values) {
             joined += value + ','
          }
       }
-      return joined
+      return joined.slice(0, -1)
    }
    if (isString(values)) {
       return values
@@ -216,4 +212,27 @@ function isString(value) {
 
 function isObj(value) {
    return typeof value === 'object' && value !== null
+}
+
+// Utils - Write
+
+function getCSS(cssVars) {
+   const open = ':root {'
+   let strVars = ''
+   const close = '}'
+
+   for (const cssVar of cssVars) {
+      const [varName, varValue] = Object.entries(cssVar).flat(1 / 0)
+      strVars += `${varName}: ${varValue};`
+   }
+
+   return open + strVars + close
+}
+
+function cleanPreflight(cssText) {
+   return cssText
+      .replace(/\/\*[\s\S]*?\*\//g, '') // Remove comments
+      .replace(/\b(?:\w+-)*theme\s*\(\s*(?:(?!\)).)*\)/g, '') // Remove properties with theme() fns
+      .replace('--tw-content', 'content') // Replace tw-content
+      .replace(/[\s\n]+/g, '') // Minify
 }
