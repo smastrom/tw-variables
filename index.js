@@ -28,17 +28,17 @@ for (const prop of configProps) {
    const [srcProp, cssPrefix, fileName] = prop
 
    const currEntries = Object.entries(getThemeProp(theme[srcProp]))
-   const currProps = []
+   const currVars = []
 
    for (const [variant, value] of currEntries) {
       if (variant.toLowerCase() !== 'default') {
-         currProps.push({
+         currVars.push({
             [`--${cssPrefix}-${normalize(variant)}`]: joinOrGetValue(value),
          })
       }
    }
 
-   varsMap.set(fileName, currProps)
+   varsMap.set(fileName, currVars)
 }
 
 // Colors
