@@ -1,6 +1,6 @@
 {
   "name": "tw-variables",
-  "version": "3.2.7",
+  "version": "0.9.0@3.2.7",
   "private": false,
   "description": "400 useful CSS variables generated straight from Tailwind source files.",
   "keywords": [
@@ -26,12 +26,16 @@
   },
   "exports": {
     ".": {
-      "import": "./dist/variables.mjs",
-      "require": "./dist/variables.js"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./variables.css": {
       "import": "./dist/variables.css",
       "require": "./dist/variables.css"
+    },
+    "./colors.css": {
+      "import": "./dist/colors.css",
+      "require": "./dist/colors.css"
     },
     "./blur.css": {
       "import": "./dist/blur.css",
@@ -97,14 +101,98 @@
       "import": "./dist/z-index.css",
       "require": "./dist/z-index.css"
     },
-    "./colors.css": {
-      "import": "./dist/colors.css",
-      "require": "./dist/colors.css"
+    "./slate.css": {
+      "import": "./dist/slate.css",
+      "require": "./dist/slate.css"
+    },
+    "./gray.css": {
+      "import": "./dist/gray.css",
+      "require": "./dist/gray.css"
+    },
+    "./zinc.css": {
+      "import": "./dist/zinc.css",
+      "require": "./dist/zinc.css"
+    },
+    "./neutral.css": {
+      "import": "./dist/neutral.css",
+      "require": "./dist/neutral.css"
+    },
+    "./stone.css": {
+      "import": "./dist/stone.css",
+      "require": "./dist/stone.css"
+    },
+    "./red.css": {
+      "import": "./dist/red.css",
+      "require": "./dist/red.css"
+    },
+    "./orange.css": {
+      "import": "./dist/orange.css",
+      "require": "./dist/orange.css"
+    },
+    "./amber.css": {
+      "import": "./dist/amber.css",
+      "require": "./dist/amber.css"
+    },
+    "./yellow.css": {
+      "import": "./dist/yellow.css",
+      "require": "./dist/yellow.css"
+    },
+    "./lime.css": {
+      "import": "./dist/lime.css",
+      "require": "./dist/lime.css"
+    },
+    "./green.css": {
+      "import": "./dist/green.css",
+      "require": "./dist/green.css"
+    },
+    "./emerald.css": {
+      "import": "./dist/emerald.css",
+      "require": "./dist/emerald.css"
+    },
+    "./teal.css": {
+      "import": "./dist/teal.css",
+      "require": "./dist/teal.css"
+    },
+    "./cyan.css": {
+      "import": "./dist/cyan.css",
+      "require": "./dist/cyan.css"
+    },
+    "./sky.css": {
+      "import": "./dist/sky.css",
+      "require": "./dist/sky.css"
+    },
+    "./blue.css": {
+      "import": "./dist/blue.css",
+      "require": "./dist/blue.css"
+    },
+    "./indigo.css": {
+      "import": "./dist/indigo.css",
+      "require": "./dist/indigo.css"
+    },
+    "./violet.css": {
+      "import": "./dist/violet.css",
+      "require": "./dist/violet.css"
+    },
+    "./purple.css": {
+      "import": "./dist/purple.css",
+      "require": "./dist/purple.css"
+    },
+    "./fuchsia.css": {
+      "import": "./dist/fuchsia.css",
+      "require": "./dist/fuchsia.css"
+    },
+    "./pink.css": {
+      "import": "./dist/pink.css",
+      "require": "./dist/pink.css"
+    },
+    "./rose.css": {
+      "import": "./dist/rose.css",
+      "require": "./dist/rose.css"
     }
   },
-  "main": "dist/variables.js",
-  "module": "dist/variables.mjs",
-  "types": "dist/variables.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "style": "dist/variables.css",
   "files": [
     "dist/*"
@@ -116,6 +204,7 @@
   },
   "devDependencies": {
     "bun": "^0.5.7",
+    "bun-types": "^0.5.7",
     "prettier": "^2.8.4",
     "tailwindcss": "3.2.7"
   }

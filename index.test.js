@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test'
-import { twVariables } from './dist/variables'
+import { twVariables } from './dist'
 import pkgJson from './package.json'
 
 // JS
