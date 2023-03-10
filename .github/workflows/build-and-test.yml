@@ -1,0 +1,17 @@
+name: Build and Test
+
+on: [push, pull_request]
+
+jobs:
+   build-and-test:
+      runs-on: macos-latest
+      steps:
+         - uses: actions/checkout@v3
+         - name: Setup Bun
+           uses: oven-sh/setup-bun@v1
+           with:
+              bun-version: latest
+         - name: Bun Install
+           run: bun install
+         - name: Build and test
+           run: bun run build
