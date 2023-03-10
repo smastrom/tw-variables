@@ -4,62 +4,61 @@ import twColors from 'tailwindcss/lib/public/colors.js'
 const outVars = new Map()
 
 const PROPS = [
-   ['blur', 'blur'],
-   ['borderRadius', 'radius'],
-   ['borderWidth', 'border'],
-   ['boxShadow', 'shadow'],
-   ['dropShadow', 'drop-shadow'],
-   ['fontWeight', 'font'],
-   ['fontFamily', 'family'],
-   ['fontSize', 'text'],
-   ['letterSpacing', 'tracking'],
-   ['lineHeight', 'leading'],
-   ['opacity', 'opacity'],
-   ['maxWidth', 'max-w'],
-   ['screens', 'screen'],
-   ['spacing', 'size'],
-   ['transitionTimingFunction', 'easing'],
-   ['zIndex', 'z'],
+   ['blur', 'blur', 'blur'],
+   ['borderRadius', 'radius', 'radius'],
+   ['borderWidth', 'border', 'border'],
+   ['boxShadow', 'shadow', 'shadow'],
+   ['dropShadow', 'drop-shadow', 'drop-shadow'],
+   ['fontWeight', 'font', 'font-weight'],
+   ['fontFamily', 'family', 'font-family'],
+   ['fontSize', 'text', 'font-size'],
+   ['letterSpacing', 'tracking', 'letter-spacing'],
+   ['lineHeight', 'leading', 'line-height'],
+   ['opacity', 'opacity', 'opacity'],
+   ['maxWidth', 'width', 'widths'],
+   ['screens', 'screen', 'screens'],
+   ['spacing', 'size', 'sizes'],
+   ['transitionTimingFunction', 'easing', 'easings'],
+   ['zIndex', 'z', 'z-index'],
 ]
 
 // Default Theme
 
 for (const PROP of PROPS) {
-   const [jsProp, twProp] = PROP
+   const [srcProp, cssPrefix, fileName] = PROP
    const outTheme = []
 
-   const propEntries = Object.entries(getThemeProp(theme[jsProp]))
+   const propEntries = Object.entries(getThemeProp(theme[srcProp]))
 
    for (const [variant, value] of propEntries) {
       if (variant.toLowerCase() !== 'default') {
          outTheme.push({
-            [`--${normalize(twProp)}-${normalize(variant)}`]: joinOrGetValue(value),
+            [`--${cssPrefix}-${normalize(variant)}`]: joinOrGetValue(value),
          })
       }
    }
 
-   outVars.set(normalize(jsProp), outTheme)
+   outVars.set(fileName, outTheme)
 }
 
 // Colors
 
 const outColors = []
+const deprecatedColors = ['lightBlue', 'trueGray', 'coolGray', 'blueGray', 'warmGray']
 
-const renameMap = new Map()
-   .set('lightBlue', 'sky')
-   .set('trueGray', 'neutral')
-   .set('coolGray', 'gray')
-   .set('blueGray', 'slate')
-   .set('warmGray', 'stone')
+const colorEntries = Object.entries(twColors).filter(
+   ([colorName]) => !deprecatedColors.includes(colorName)
+)
 
-for (const [colorName, colorValue] of Object.entries(twColors)) {
+for (const [colorName, colorValue] of colorEntries) {
    if (isObj(colorValue)) {
+      // { amber: { 50: value, 100: value, ... }}
       const colorObj = Object.entries(colorValue)
 
       if (isDeepArr(colorObj)) {
          for (const [numericVariant, variantValue] of colorObj) {
             outColors.push({
-               [`--${renameColor(colorName)}-${numericVariant}`]: variantValue,
+               [`--${normalize(colorName)}-${numericVariant}`]: variantValue,
             })
          }
       }
@@ -68,23 +67,26 @@ for (const [colorName, colorValue] of Object.entries(twColors)) {
 
 outVars.set('colors', outColors)
 
-// Write JS / JSON
+// Write JS / D.TS
 
-const outEntries = Array.from(outVars.entries())
-const outArr = Array.from(outVars.values()).flat(1 / 0) // {'--name': 'value', '--name': 'value', ...}
+const outEntries = Array.from(outVars.entries()) // [['fileName', [{ '--name', value} ... ]]]
+const outArr = Array.from(outVars.values()).flat(1 / 0) // [{ '--name': value, ... }]
 const outObj = {}
+
+let outType = ''
 
 for (const cssVar of outArr) {
    const [varName, varValue] = Object.entries(cssVar).flat(1 / 0)
    outObj[varName] = varValue
+   outType = outType + `'${varName}': string,`
 }
 
-await Bun.write(`./dist/variables.js`, `export const twVariables = ${JSON.stringify(outObj)}`)
-await Bun.write(`./dist/variables.json`, JSON.stringify(outObj))
+await Bun.write('./dist/variables.mjs', `export const twVariables = ${JSON.stringify(outObj)}`)
+await Bun.write('./dist/variables.js', `module.exports = ${JSON.stringify(outObj)}`)
+await Bun.write('./dist/variables.json', JSON.stringify(outObj))
 
-// Write one CSS file with a single :root block
-
-await Bun.write(`./dist/all.css`, getCSS(outArr))
+const types = `export declare const twVariables: TwVariables; export type TwVariables = { ${outType} }`
+await Bun.write('./dist/variables.d.ts', types)
 
 // Write one CSS file with separate :root blocks
 
@@ -94,13 +96,38 @@ for (const [, cssVars] of outEntries) {
    _rootBlocks += getCSS(cssVars)
 }
 
-await Bun.write(`./dist/variables.css`, _rootBlocks)
+await Bun.write('./dist/variables.css', _rootBlocks)
 
-// Write single files
+// Write single CSS files
 
-for await (const [groupName, cssVars] of outEntries) {
-   await Bun.write(`./dist/${groupName}.css`, getCSS(cssVars))
+for await (const [fileName, cssVars] of outEntries) {
+   await Bun.write(`./dist/${fileName}.css`, getCSS(cssVars))
 }
+
+// Write PKG JSON
+
+const pkgJson = await Bun.file('./package.json')
+const pkgText = await pkgJson.text()
+const pkgObj = JSON.parse(pkgText)
+
+await Bun.write('./package-bk.json', pkgText)
+
+pkgObj.version = ''
+pkgObj.version = require('tailwindcss/package.json').version
+
+pkgObj.exports = {}
+pkgObj.exports['.'] = { import: './dist/variables.mjs', require: './dist/variables.js' }
+pkgObj.exports['./variables.css'] = {
+   import: './dist/variables.css',
+   require: './dist/variables.css',
+}
+
+for (const [fileName] of outEntries) {
+   const path = `./dist/${fileName}.css`
+   pkgObj.exports[`./${fileName}.css`] = { import: path, require: path }
+}
+
+await Bun.write('./package.json', JSON.stringify(pkgObj, undefined, 2))
 
 // Utils - Write
 
@@ -146,17 +173,6 @@ function joinOrGetValue(values) {
       return values
    }
    return ''
-}
-
-// Colors - Utils
-
-function renameColor(colorName) {
-   const newName = renameMap.get(colorName)
-
-   if (newName) {
-      return normalize(newName)
-   }
-   return normalize(colorName)
 }
 
 // Misc
