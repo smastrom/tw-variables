@@ -1,0 +1,10 @@
+{
+   "name": "tw-variables",
+   "scripts": {
+      "build": "rm -rf dist && mkdir dist && bun run index.js"
+   },
+   "devDependencies": {
+      "prettier": "^2.8.4",
+      "tailwindcss": "^3.2.7"
+   }
+}
