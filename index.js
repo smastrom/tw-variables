@@ -69,8 +69,8 @@ outVars.set('colors', outColors)
 
 // Write JS / D.TS
 
-const outEntries = Array.from(outVars.entries()) // [['fileName', [{ '--name', value} ... ]]]
-const outArr = Array.from(outVars.values()).flat(1 / 0) // [{ '--name': value, ... }]
+const outEntries = Array.from(outVars.entries()) // [['fileName', [{ '--name', value }, ... ]]]
+const outArr = Array.from(outVars.values()).flat(1 / 0) // [{ '--name': value }, ... ]
 const outObj = {}
 
 let outType = ''
@@ -81,9 +81,11 @@ for (const cssVar of outArr) {
    outType = outType + `'${varName}': string,`
 }
 
-await Bun.write('./dist/variables.mjs', `export const twVariables = ${JSON.stringify(outObj)}`)
-await Bun.write('./dist/variables.js', `module.exports = ${JSON.stringify(outObj)}`)
-await Bun.write('./dist/variables.json', JSON.stringify(outObj))
+const outJs = JSON.stringify(outObj)
+
+await Bun.write('./dist/variables.mjs', `export const twVariables = ${outJs}`)
+await Bun.write('./dist/variables.js', `module.exports = ${outJs}`)
+await Bun.write('./dist/variables.json', outJs)
 
 const types = `export declare const twVariables: TwVariables; export type TwVariables = { ${outType} }`
 await Bun.write('./dist/variables.d.ts', types)

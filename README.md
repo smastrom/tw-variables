@@ -1,6 +1,6 @@
 # Tailwind Variables
 
-Uses Tailwind source files to generates 410 useful CSS variables.
+~390 useful CSS variables generated straight from Tailwind source files.
 
 <br />
 
@@ -8,15 +8,11 @@ Uses Tailwind source files to generates 410 useful CSS variables.
 
 ### With a build step
 
-Install this package in your _dev_ dependencies:
-
 ```bash
 pnpm install -D tw-variables
 ```
 
 ### In the browser
-
-Or import the CSS directly from the CDN:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/variables.css" />
@@ -45,10 +41,15 @@ import 'tw-variables/size.css'
 
 You can use this package in conjunction with `postcss-jit-props` to strip unused variables from the final CSS.
 
+```bash
+pnpm add -D postcss postcss-jit-props
+```
+
 ### Nuxt 3
 
+**nuxt.config.ts**
+
 ```ts
-// nuxt.config.ts
 import { twVariables } from 'tw-variables'
 
 export default defineNuxtConfig({
@@ -62,17 +63,16 @@ export default defineNuxtConfig({
 })
 ```
 
-### Any other setup
+### Anything besides Nuxt 3
 
 **postcss.config.cjs**
 
 ```js
+const postcssJitProps = require('postcss-jit-props')
+const twVariables = require('tw-variables')
+
 module.exports = {
-   plugins: {
-      'postcss-jit-props': {
-         variables: require('tw-variables/dist/tw-variables.json'),
-      },
-   },
+   plugins: [postcssJitProps(twVariables)],
 }
 ```
 
