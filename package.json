@@ -1,10 +1,108 @@
 {
-   "name": "tw-variables",
-   "scripts": {
-      "build": "rm -rf dist && mkdir dist && bun run index.js"
-   },
-   "devDependencies": {
-      "prettier": "^2.8.4",
-      "tailwindcss": "^3.2.7"
-   }
+  "name": "tw-variables",
+  "private": false,
+  "version": "3.2.7",
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "tailwind-variables",
+    "css",
+    "css-variables",
+    "tw-variables"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Simone Mastromattei",
+    "email": "smastrom@proton.me"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/variables.mjs",
+      "require": "./dist/variables.js"
+    },
+    "./variables.css": {
+      "import": "./dist/variables.css",
+      "require": "./dist/variables.css"
+    },
+    "./blur.css": {
+      "import": "./dist/blur.css",
+      "require": "./dist/blur.css"
+    },
+    "./radius.css": {
+      "import": "./dist/radius.css",
+      "require": "./dist/radius.css"
+    },
+    "./border.css": {
+      "import": "./dist/border.css",
+      "require": "./dist/border.css"
+    },
+    "./shadow.css": {
+      "import": "./dist/shadow.css",
+      "require": "./dist/shadow.css"
+    },
+    "./drop-shadow.css": {
+      "import": "./dist/drop-shadow.css",
+      "require": "./dist/drop-shadow.css"
+    },
+    "./font-weight.css": {
+      "import": "./dist/font-weight.css",
+      "require": "./dist/font-weight.css"
+    },
+    "./font-family.css": {
+      "import": "./dist/font-family.css",
+      "require": "./dist/font-family.css"
+    },
+    "./font-size.css": {
+      "import": "./dist/font-size.css",
+      "require": "./dist/font-size.css"
+    },
+    "./letter-spacing.css": {
+      "import": "./dist/letter-spacing.css",
+      "require": "./dist/letter-spacing.css"
+    },
+    "./line-height.css": {
+      "import": "./dist/line-height.css",
+      "require": "./dist/line-height.css"
+    },
+    "./opacity.css": {
+      "import": "./dist/opacity.css",
+      "require": "./dist/opacity.css"
+    },
+    "./widths.css": {
+      "import": "./dist/widths.css",
+      "require": "./dist/widths.css"
+    },
+    "./screens.css": {
+      "import": "./dist/screens.css",
+      "require": "./dist/screens.css"
+    },
+    "./sizes.css": {
+      "import": "./dist/sizes.css",
+      "require": "./dist/sizes.css"
+    },
+    "./easings.css": {
+      "import": "./dist/easings.css",
+      "require": "./dist/easings.css"
+    },
+    "./z-index.css": {
+      "import": "./dist/z-index.css",
+      "require": "./dist/z-index.css"
+    },
+    "./colors.css": {
+      "import": "./dist/colors.css",
+      "require": "./dist/colors.css"
+    }
+  },
+  "main": "dist/variables.js",
+  "module": "dist/variables.mjs",
+  "types": "dist/variables.d.ts",
+  "style": "dist/variables.css",
+  "scripts": {
+    "build": "rm -rf dist && mkdir dist && bun run index.js"
+  },
+  "devDependencies": {
+    "bun": "^0.5.7",
+    "prettier": "^2.8.4",
+    "tailwindcss": "3.2.7"
+  }
 }
