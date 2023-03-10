@@ -1,6 +1,6 @@
 {
   "name": "tw-variables",
-  "version": "0.9.0@3.2.7",
+  "version": "0.9.0-3.2.7",
   "private": false,
   "description": "400 useful CSS variables generated straight from Tailwind source files.",
   "keywords": [
