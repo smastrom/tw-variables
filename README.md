@@ -1,34 +1,63 @@
+[![](https://data.jsdelivr.com/v1/package/npm/tw-variables/badge)](https://www.jsdelivr.com/package/npm/tw-variables)
+
 # Tailwind Variables
 
 ~400 useful CSS variables generated straight from Tailwind source files.
 
 <br />
 
-## Installation
+## Browser
 
-### With a build step
+All variables including colors:
+
+```html
+<link
+   rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/variables.css"
+/>
+```
+
+One or more subsets:
+
+```html
+<link
+   rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/colors.css"
+/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/size.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/sky.css" />
+```
+
+Preflight:
+
+```html
+<link
+   rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/preflight.css"
+/>
+```
+
+Pick any import on jsDelivr: [Link](https://www.jsdelivr.com/package/npm/tw-variables?tab=files&path=dist)
+
+<br />
+
+## Installation
 
 ```bash
 pnpm install -D tw-variables
-```
-
-### In the browser
-
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/variables.css" />
 ```
 
 <br />
 
 ## Import - CSS
 
-Import all variables including colors:
+All variables including colors:
 
 ```js
 import 'tw-variables/variables.css'
 ```
 
-Import one or more subsets:
+One or more subsets:
 
 ```js
 import 'tw-variables/colors.css'
@@ -36,7 +65,7 @@ import 'tw-variables/size.css'
 import 'tw-variables/green.css'
 ```
 
-Preflight is also available:
+Preflight:
 
 ```js
 import 'tw-variables/preflight.css'
