@@ -1,0 +1,10 @@
+:root {
+   --blur-0: 0;
+   --blur-none: 0;
+   --blur-sm: 4px;
+   --blur-md: 12px;
+   --blur-lg: 16px;
+   --blur-xl: 24px;
+   --blur-2xl: 40px;
+   --blur-3xl: 64px;
+}

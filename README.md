@@ -1,57 +1,55 @@
-[![](https://data.jsdelivr.com/v1/package/npm/tw-variables/badge)](https://www.jsdelivr.com/package/npm/tw-variables)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/tw-variables/build-and-test.yml?branch=main&label=build) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/tw-variables/build-and-test.yml?branch=main&label=checks)
 
-# Tailwind Variables
+# Tailwind Variables (tw-variables)
 
-~400 useful CSS variables generated straight from Tailwind source files.
+~400 useful, ready-to-import CSS variables generated straight from Tailwind source files.
 
 <br />
 
-## Browser
+## Copy / Paste
+
+| Source                                                                            | Type       |
+| --------------------------------------------------------------------------------- | ---------- |
+| [jsDelivr](https://www.jsdelivr.com/package/npm/tw-variables?tab=files&path=dist) | Minified   |
+| [GitHub](https://github.com/smastrom/tw-variables/tree/main/css)                  | Unminified |
+
+<br />
+
+## Browser Import
 
 All variables including colors:
 
 ```html
-<link
-   rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/variables.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/variables.css" />
 ```
 
 One or more subsets:
 
 ```html
-<link
-   rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/colors.css"
-/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/size.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/sky.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/colors.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/size.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/sky.css" />
 ```
 
 Preflight:
 
 ```html
-<link
-   rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/preflight.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/preflight.css" />
 ```
-
-Pick any import on jsDelivr: [Link](https://www.jsdelivr.com/package/npm/tw-variables?tab=files&path=dist)
 
 <br />
 
-## Installation
+## Package Manager
+
+### Installation
 
 ```bash
-pnpm install -D tw-variables
+pnpm add -D tw-variables
 ```
 
-<br />
+### Import - CSS
 
-## Import - CSS
-
-All variables including colors:
+All variables (including colors):
 
 ```js
 import 'tw-variables/variables.css'
@@ -71,37 +69,13 @@ Preflight:
 import 'tw-variables/preflight.css'
 ```
 
-<br />
+### Import - PostCSS
 
-## Import - PostCSS
-
-If using PostCSS, you can use this package in conjunction with [postcss-jit-props](https://github.com/GoogleChromeLabs/postcss-jit-props) to strip unused variables from the final CSS:
+If using PostCSS, you can use this package in conjunction with [postcss-jit-props](https://github.com/GoogleChromeLabs/postcss-jit-props) to strip any unused variable from the final CSS:
 
 ```bash
 pnpm add -D postcss postcss-jit-props
 ```
-
-### Nuxt 3
-
-**nuxt.config.ts**
-
-```ts
-import { twVariables } from 'tw-variables'
-
-export default defineNuxtConfig({
-   build: {
-      postcss: {
-         plugins: {
-            'postcss-jit-props': twVariables,
-         },
-      },
-   },
-})
-```
-
-### Any other framework
-
-**postcss.config.cjs**
 
 ```js
 const postcssJitProps = require('postcss-jit-props')
@@ -123,7 +97,7 @@ module.exports = {
    z-index: var(--z-10);
    padding: var(--size-4);
    margin: var(--size-6);
-   font-family: var(--family-sans);
+   font-family: 'Basier Circle', var(--family-sans);
    font-size: var(--text-base);
    font-weight: var(--font-medium);
    line-height: var(--leading-normal);
@@ -192,7 +166,15 @@ Colors reference: [Link](https://tailwindcss.com/docs/customizing-colors)
 
 <br />
 
-## Check also
+## Updates
+
+Since the output is generated as expected, for now, I consider this package "complete". I also see no point in updating it everytime Tailwind releases a new version.
+
+Once Tailwind will drop some new tokens that are worth to be added, I'll make sure to include them in a new version of this package.
+
+<br />
+
+## See also
 
 [Open Props](https://github.com/argyleink/open-props) by _Adam Argyle_
 
@@ -200,4 +182,4 @@ Colors reference: [Link](https://tailwindcss.com/docs/customizing-colors)
 
 ## License
 
-MIT
+0BSD

@@ -1,15 +1,16 @@
 {
    "name": "tw-variables",
-   "version": "0.9.0-3.2.7",
+   "version": "3.2.0",
    "private": false,
-   "description": "400 useful CSS variables generated straight from Tailwind source files.",
+   "description": "400 useful, ready-to-import CSS variables generated straight from Tailwind source files.",
    "keywords": [
       "tailwind",
       "tailwindcss",
-      "tailwind-variables",
+      "tailwind-css-variables",
+      "tw-variables",
       "css",
       "css-variables",
-      "tw-variables"
+      "tailwind-tokens"
    ],
    "homepage": "https://github.com/smastrom/tw-variables",
    "bugs": {
@@ -29,170 +30,48 @@
          "import": "./dist/index.mjs",
          "require": "./dist/index.js"
       },
-      "./preflight.css": {
-         "import": "./dist/preflight.css",
-         "require": "./dist/preflight.css"
-      },
-      "./variables.css": {
-         "import": "./dist/variables.css",
-         "require": "./dist/variables.css"
-      },
-      "./colors.css": {
-         "import": "./dist/colors.css",
-         "require": "./dist/colors.css"
-      },
-      "./blur.css": {
-         "import": "./dist/blur.css",
-         "require": "./dist/blur.css"
-      },
-      "./border-radius.css": {
-         "import": "./dist/border-radius.css",
-         "require": "./dist/border-radius.css"
-      },
-      "./border-width.css": {
-         "import": "./dist/border-width.css",
-         "require": "./dist/border-width.css"
-      },
-      "./shadow.css": {
-         "import": "./dist/shadow.css",
-         "require": "./dist/shadow.css"
-      },
-      "./drop-shadow.css": {
-         "import": "./dist/drop-shadow.css",
-         "require": "./dist/drop-shadow.css"
-      },
-      "./font-weight.css": {
-         "import": "./dist/font-weight.css",
-         "require": "./dist/font-weight.css"
-      },
-      "./font-family.css": {
-         "import": "./dist/font-family.css",
-         "require": "./dist/font-family.css"
-      },
-      "./font-size.css": {
-         "import": "./dist/font-size.css",
-         "require": "./dist/font-size.css"
-      },
-      "./letter-spacing.css": {
-         "import": "./dist/letter-spacing.css",
-         "require": "./dist/letter-spacing.css"
-      },
-      "./line-height.css": {
-         "import": "./dist/line-height.css",
-         "require": "./dist/line-height.css"
-      },
-      "./opacity.css": {
-         "import": "./dist/opacity.css",
-         "require": "./dist/opacity.css"
-      },
-      "./width.css": {
-         "import": "./dist/width.css",
-         "require": "./dist/width.css"
-      },
-      "./screen.css": {
-         "import": "./dist/screen.css",
-         "require": "./dist/screen.css"
-      },
-      "./size.css": {
-         "import": "./dist/size.css",
-         "require": "./dist/size.css"
-      },
-      "./easing.css": {
-         "import": "./dist/easing.css",
-         "require": "./dist/easing.css"
-      },
-      "./z-index.css": {
-         "import": "./dist/z-index.css",
-         "require": "./dist/z-index.css"
-      },
-      "./slate.css": {
-         "import": "./dist/slate.css",
-         "require": "./dist/slate.css"
-      },
-      "./gray.css": {
-         "import": "./dist/gray.css",
-         "require": "./dist/gray.css"
-      },
-      "./zinc.css": {
-         "import": "./dist/zinc.css",
-         "require": "./dist/zinc.css"
-      },
-      "./neutral.css": {
-         "import": "./dist/neutral.css",
-         "require": "./dist/neutral.css"
-      },
-      "./stone.css": {
-         "import": "./dist/stone.css",
-         "require": "./dist/stone.css"
-      },
-      "./red.css": {
-         "import": "./dist/red.css",
-         "require": "./dist/red.css"
-      },
-      "./orange.css": {
-         "import": "./dist/orange.css",
-         "require": "./dist/orange.css"
-      },
-      "./amber.css": {
-         "import": "./dist/amber.css",
-         "require": "./dist/amber.css"
-      },
-      "./yellow.css": {
-         "import": "./dist/yellow.css",
-         "require": "./dist/yellow.css"
-      },
-      "./lime.css": {
-         "import": "./dist/lime.css",
-         "require": "./dist/lime.css"
-      },
-      "./green.css": {
-         "import": "./dist/green.css",
-         "require": "./dist/green.css"
-      },
-      "./emerald.css": {
-         "import": "./dist/emerald.css",
-         "require": "./dist/emerald.css"
-      },
-      "./teal.css": {
-         "import": "./dist/teal.css",
-         "require": "./dist/teal.css"
-      },
-      "./cyan.css": {
-         "import": "./dist/cyan.css",
-         "require": "./dist/cyan.css"
-      },
-      "./sky.css": {
-         "import": "./dist/sky.css",
-         "require": "./dist/sky.css"
-      },
-      "./blue.css": {
-         "import": "./dist/blue.css",
-         "require": "./dist/blue.css"
-      },
-      "./indigo.css": {
-         "import": "./dist/indigo.css",
-         "require": "./dist/indigo.css"
-      },
-      "./violet.css": {
-         "import": "./dist/violet.css",
-         "require": "./dist/violet.css"
-      },
-      "./purple.css": {
-         "import": "./dist/purple.css",
-         "require": "./dist/purple.css"
-      },
-      "./fuchsia.css": {
-         "import": "./dist/fuchsia.css",
-         "require": "./dist/fuchsia.css"
-      },
-      "./pink.css": {
-         "import": "./dist/pink.css",
-         "require": "./dist/pink.css"
-      },
-      "./rose.css": {
-         "import": "./dist/rose.css",
-         "require": "./dist/rose.css"
-      }
+      "./variables.json": "./dist/variables.json",
+      "./preflight.css": "./dist/preflight.css",
+      "./variables.css": "./dist/variables.css",
+      "./colors.css": "./dist/colors.css",
+      "./blur.css": "./dist/blur.css",
+      "./border-radius.css": "./dist/border-radius.css",
+      "./border-width.css": "./dist/border-width.css",
+      "./box-shadow.css": "./dist/box-shadow.css",
+      "./drop-shadow.css": "./dist/drop-shadow.css",
+      "./font-weight.css": "./dist/font-weight.css",
+      "./font-family.css": "./dist/font-family.css",
+      "./font-size.css": "./dist/font-size.css",
+      "./letter-spacing.css": "./dist/letter-spacing.css",
+      "./line-height.css": "./dist/line-height.css",
+      "./opacity.css": "./dist/opacity.css",
+      "./width.css": "./dist/width.css",
+      "./screen.css": "./dist/screen.css",
+      "./size.css": "./dist/size.css",
+      "./easing.css": "./dist/easing.css",
+      "./z-index.css": "./dist/z-index.css",
+      "./slate.css": "./dist/slate.css",
+      "./gray.css": "./dist/gray.css",
+      "./zinc.css": "./dist/zinc.css",
+      "./neutral.css": "./dist/neutral.css",
+      "./stone.css": "./dist/stone.css",
+      "./red.css": "./dist/red.css",
+      "./orange.css": "./dist/orange.css",
+      "./amber.css": "./dist/amber.css",
+      "./yellow.css": "./dist/yellow.css",
+      "./lime.css": "./dist/lime.css",
+      "./green.css": "./dist/green.css",
+      "./emerald.css": "./dist/emerald.css",
+      "./teal.css": "./dist/teal.css",
+      "./cyan.css": "./dist/cyan.css",
+      "./sky.css": "./dist/sky.css",
+      "./blue.css": "./dist/blue.css",
+      "./indigo.css": "./dist/indigo.css",
+      "./violet.css": "./dist/violet.css",
+      "./purple.css": "./dist/purple.css",
+      "./fuchsia.css": "./dist/fuchsia.css",
+      "./pink.css": "./dist/pink.css",
+      "./rose.css": "./dist/rose.css"
    },
    "main": "dist/index.js",
    "module": "dist/index.mjs",
@@ -202,17 +81,16 @@
       "dist/*"
    ],
    "scripts": {
-      "prebuild": "rm -rf dist && mkdir dist",
-      "build": "bun run index.js",
-      "postbuild": "bun run test:build && bun run test:prepublish",
-      "test:build": "bun test index.test.js",
-      "test:prepublish": "rm -rf temp && mkdir temp && bun run prepublish.js && bun test prepublish.test.js",
-      "prepublish": "bun run test:prepublish"
+      "prebuild": "rm -rf dist css && mkdir dist css",
+      "build": "bun run build.js",
+      "test": "bun test build.test.js",
+      "format": "cp -R dist/*.css css && prettier --write css/*",
+      "postbuild": "bun run test && bun run format"
    },
    "devDependencies": {
       "bun": "^0.5.7",
       "bun-types": "^0.5.7",
-      "prettier": "^2.8.4",
-      "tailwindcss": "3.2.7"
+      "prettier": "^2.8.7",
+      "tailwindcss": "^3.2.7"
    }
 }
