@@ -76,12 +76,12 @@ for (const [_colorName, variantColors] of colorEntries) {
 // Write JS
 
 const outEntries = Array.from(varsMap.entries()) // [['fileName', [{ '--name', value }, ... ]]]
-const outVarsArr = Array.from(varsMap.values()).flat(1 / 0) // [{ '--name': value }, ... ]
+const allVarsArr = Array.from(varsMap.values()).flat(1 / 0) // [{ '--name': value }, ... ]
 const outObj = {}
 
 let outDts = ''
 
-for (const cssVar of outVarsArr) {
+for (const cssVar of allVarsArr) {
    const [varName, varValue] = Object.entries(cssVar).flat(1 / 0)
    outObj[varName] = varValue
    outDts = outDts + `'${varName}': string,`
