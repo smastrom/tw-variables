@@ -7,7 +7,7 @@ const configProps = [
    ['blur', 'blur', 'blur'],
    ['borderRadius', 'radius', 'border-radius'],
    ['borderWidth', 'border', 'border-width'],
-   ['boxShadow', 'shadow', 'shadow'],
+   ['boxShadow', 'shadow', 'box-shadow'],
    ['dropShadow', 'drop-shadow', 'drop-shadow'],
    ['fontWeight', 'font', 'font-weight'],
    ['fontFamily', 'family', 'font-family'],
@@ -30,11 +30,15 @@ for (const prop of configProps) {
    const currEntries = Object.entries(getThemeProp(theme[srcProp]))
    const currVars = []
 
-   for (const [variant, value] of currEntries) {
+   for (const [variant, _value] of currEntries) {
       if (variant.toLowerCase() !== 'default') {
-         currVars.push({
-            [`--${cssPrefix}-${normalize(variant)}`]: joinOrGetValue(value),
-         })
+         const value = joinOrGetValue(_value)
+
+         if (value) {
+            currVars.push({
+               [`--${cssPrefix}-${normalize(variant)}`]: value,
+            })
+         }
       }
    }
 
@@ -44,45 +48,43 @@ for (const prop of configProps) {
 // Colors
 
 const allColors = []
+const noColors = ['inherit', 'transparent', 'current', 'black', 'white']
 const deprecatedColors = ['lightBlue', 'trueGray', 'coolGray', 'blueGray', 'warmGray']
 
 const colorEntries = Object.entries(twColors).filter(
-   ([colorName]) => !deprecatedColors.includes(colorName)
+   ([colorName]) => ![...deprecatedColors, ...noColors].includes(colorName)
 )
 
 for (const [_colorName, variantColors] of colorEntries) {
    const currColors = []
 
-   if (isObj(variantColors)) {
-      // { amber: { 50: value, 100: value, ... }}
-      const colorName = normalize(_colorName) // Used as file name as well
-      const currVariants = Object.entries(variantColors)
+   const colorName = normalize(_colorName) // Used also as file name
+   const currVariants = Object.entries(variantColors)
 
-      if (isDeepArr(currVariants)) {
-         for (const [numericVariant, value] of currVariants) {
-            const _var = {
-               [`--${colorName}-${numericVariant}`]: value,
-            }
-
-            currColors.push(_var)
-            allColors.push(_var)
+   if (isColorArr(currVariants)) {
+      for (const [numericVariant, value] of currVariants) {
+         const cssVar = {
+            [`--${colorName}-${numericVariant}`]: value,
          }
 
-         varsMap.set(colorName, currColors)
+         currColors.push(cssVar)
+         allColors.push(cssVar)
       }
+
+      varsMap.set(colorName, currColors)
    }
 }
 
-// Write JS
+// Write JS / JSON
 
 const outEntries = Array.from(varsMap.entries()) // [['fileName', [{ '--name', value }, ... ]]]
-const allVarsArr = Array.from(varsMap.values()).flat(1 / 0) // [{ '--name': value }, ... ]
+const allVarsArr = flatDeep(Array.from(varsMap.values())) // [{ '--name': value }, ... ]
 const outObj = {}
 
 let outDts = ''
 
 for (const cssVar of allVarsArr) {
-   const [varName, varValue] = Object.entries(cssVar).flat(1 / 0)
+   const [varName, varValue] = flatDeep(Object.entries(cssVar))
    outObj[varName] = varValue
    outDts = outDts + `'${varName}': string,`
 }
@@ -98,7 +100,7 @@ await Bun.write('./dist/variables.json', outJson)
 const types = `export declare const twVariables: TwVariables; export type TwVariables = { ${outDts} }`
 await Bun.write('./dist/index.d.ts', types)
 
-// Write all vars in a single CSS file in different root blocks:
+// Write all vars in a single CSS file in different root blocks
 
 let rootBlocks = ''
 
@@ -120,8 +122,8 @@ for await (const [fileName, cssVars] of outEntries) {
 
 // Write preflight CSS file
 
-const pfText = await Bun.file('node_modules/tailwindcss/src/css/preflight.css').text()
-await Bun.write('./dist/preflight.css', cleanPreflight(pfText))
+const pfText = await Bun.file('preflight.css').text()
+await Bun.write('./dist/preflight.css', pfText.replace(/[\s\n]+/g, '')) /* Minify */
 
 // Package.json
 
@@ -130,36 +132,27 @@ await Bun.write('./package-bk.json', pkgText)
 
 const pkgObj = JSON.parse(pkgText)
 
-// --- JS
-
 pkgObj.exports = {}
+
+// --- JS / JSON
+
 pkgObj.exports['.'] = { import: './dist/index.mjs', require: './dist/index.js' }
+
+pkgObj.exports['./variables.json'] = './dist/variables.json'
 
 // --- Unified CSS files
 
-pkgObj.exports['./preflight.css'] = {
-   import: './dist/preflight.css',
-   require: './dist/preflight.css',
-}
-
-pkgObj.exports['./variables.css'] = {
-   import: './dist/variables.css',
-   require: './dist/variables.css',
-}
-
-pkgObj.exports['./colors.css'] = {
-   import: './dist/colors.css',
-   require: './dist/colors.css',
-}
+pkgObj.exports['./preflight.css'] = './dist/preflight.css'
+pkgObj.exports['./variables.css'] = './dist/variables.css'
+pkgObj.exports['./colors.css'] = './dist/colors.css'
 
 // --- Separated CSS files
 
 for (const [fileName] of outEntries) {
-   const path = `./dist/${fileName}.css`
-   pkgObj.exports[`./${fileName}.css`] = { import: path, require: path }
+   pkgObj.exports[`./${fileName}.css`] = `./dist/${fileName}.css`
 }
 
-await Bun.write('./package.json', JSON.stringify(pkgObj, undefined, 2))
+await Bun.write('./package.json', JSON.stringify(pkgObj, undefined, 3))
 
 // Value getters
 
@@ -195,24 +188,14 @@ function joinOrGetValue(values) {
 // Write Utils
 
 function getCSS(cssVars) {
-   const open = ':root {'
    let strVars = ''
-   const close = '}'
 
    for (const cssVar of cssVars) {
-      const [varName, varValue] = Object.entries(cssVar).flat(1 / 0)
+      const [varName, varValue] = flatDeep(Object.entries(cssVar))
       strVars += `${varName}: ${varValue};`
    }
 
-   return open + strVars + close
-}
-
-function cleanPreflight(cssText) {
-   return cssText
-      .replace(/\/\*[\s\S]*?\*\//g, '') // Remove comments
-      .replace(/\b(?:\w+-)*theme\s*\(\s*(?:(?!\)).)*\)/g, '') // Remove properties with theme() fns
-      .replace('--tw-content', 'content') // Replace tw-content
-      .replace(/[\s\n]+/g, '') // Minify
+   return `:root { ${strVars} }`
 }
 
 // Misc
@@ -225,8 +208,8 @@ function camelToKebab(string) {
    return string.replace(/[A-Z]/g, (match) => '-' + match)
 }
 
-function isDeepArr(array) {
-   return Array.isArray(array) && array.every((item) => Array.isArray(item))
+function isColorArr(array) {
+   return Array.isArray(array) && array.every((item) => Array.isArray(item) && item.every(isString))
 }
 
 function isString(value) {
@@ -234,5 +217,9 @@ function isString(value) {
 }
 
 function isObj(value) {
-   return typeof value === 'object' && value !== null
+   return typeof value === 'object' && value != null && !Array.isArray(value)
+}
+
+function flatDeep(array) {
+   return array.flat(1 / 0)
 }

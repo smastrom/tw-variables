@@ -1,0 +1,20 @@
+:root {
+   --width-0: 0rem;
+   --width-none: none;
+   --width-xs: 20rem;
+   --width-sm: 24rem;
+   --width-md: 28rem;
+   --width-lg: 32rem;
+   --width-xl: 36rem;
+   --width-2xl: 42rem;
+   --width-3xl: 48rem;
+   --width-4xl: 56rem;
+   --width-5xl: 64rem;
+   --width-6xl: 72rem;
+   --width-7xl: 80rem;
+   --width-full: 100%;
+   --width-min: min-content;
+   --width-max: max-content;
+   --width-fit: fit-content;
+   --width-prose: 65ch;
+}
