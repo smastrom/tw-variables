@@ -34,7 +34,7 @@ test('Any key contains only hypens and letters', () => {
 
 // CSS Files
 
-test('Besides font-family and preflight, any CSS property should not contain quotes or undefined', async () => {
+test('Besides font-family and preflight, any CSS property should not contain quotes', async () => {
    const cssImports = exports.filter(
       ({ import: _import }) =>
          _import.endsWith('.css') &&
