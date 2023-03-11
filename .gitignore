@@ -2,4 +2,3 @@ node_modules
 dist
 package-bk.json
 *.tgz
-temp

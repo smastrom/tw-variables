@@ -1,4 +1,4 @@
-[![](https://data.jsdelivr.com/v1/package/npm/tw-variables/badge)](https://www.jsdelivr.com/package/npm/tw-variables)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/vue-use-active-scroll/tests.yml?branch=main&label=build) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/vue-use-active-scroll/tests.yml?branch=main&label=tests) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/vue-use-active-scroll/tests.yml?branch=main&label=checks) ![npm](https://img.shields.io/npm/dt/tw-variables)
 
 # Tailwind Variables
 
@@ -11,30 +11,21 @@
 All variables including colors:
 
 ```html
-<link
-   rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/variables.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/variables.css" />
 ```
 
 One or more subsets:
 
 ```html
-<link
-   rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/colors.css"
-/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/size.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/sky.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/colors.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/size.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/sky.css" />
 ```
 
 Preflight:
 
 ```html
-<link
-   rel="stylesheet"
-   href="https://cdn.jsdelivr.net/npm/tw-variables@0.9.0-3.2.7/dist/preflight.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/preflight.css" />
 ```
 
 Pick any import on jsDelivr: [Link](https://www.jsdelivr.com/package/npm/tw-variables?tab=files&path=dist)
@@ -51,7 +42,7 @@ pnpm install -D tw-variables
 
 ## Import - CSS
 
-All variables including colors:
+All variables (including colors):
 
 ```js
 import 'tw-variables/variables.css'
@@ -75,7 +66,7 @@ import 'tw-variables/preflight.css'
 
 ## Import - PostCSS
 
-If using PostCSS, you can use this package in conjunction with [postcss-jit-props](https://github.com/GoogleChromeLabs/postcss-jit-props) to strip unused variables from the final CSS:
+If using PostCSS, you can use this package in conjunction with [postcss-jit-props](https://github.com/GoogleChromeLabs/postcss-jit-props) to strip any unused variable from the final CSS:
 
 ```bash
 pnpm add -D postcss postcss-jit-props
@@ -123,7 +114,7 @@ module.exports = {
    z-index: var(--z-10);
    padding: var(--size-4);
    margin: var(--size-6);
-   font-family: var(--family-sans);
+   font-family: 'Basier Circle', var(--family-sans);
    font-size: var(--text-base);
    font-weight: var(--font-medium);
    line-height: var(--leading-normal);
@@ -192,7 +183,19 @@ Colors reference: [Link](https://tailwindcss.com/docs/customizing-colors)
 
 <br />
 
-## Check also
+## Updates
+
+Since the output is tested and generated as expected, I consider this package "complete" for now.
+
+I also see no point in updating it everytime Tailwind releases a new version.
+
+Once Tailwind will drop some new tokens that are worth to be added, I'll make sure to include them in a new version of this package.
+
+> Output generated using `tailwindcss v3.2.7`
+
+<br />
+
+## See also
 
 [Open Props](https://github.com/argyleink/open-props) by _Adam Argyle_
 
