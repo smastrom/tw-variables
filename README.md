@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/tailwind-variables/build-and-tests.yml?branch=main&label=build) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/tailwind-variables/build-and-tests.yml?branch=main&label=checks)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/tailwind-variables/build-and-test.yml?branch=main&label=build) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/tailwind-variables/build-and-test.yml?branch=main&label=checks)
 
 # Tailwind Variables
 
@@ -47,15 +47,15 @@ Pick any import on jsDelivr: [Link](https://www.jsdelivr.com/package/npm/@smastr
 
 <br />
 
-## Installation
+## Package Manager
+
+### Installation
 
 ```bash
 pnpm add -D @smastrom/tailwind-variables
 ```
 
-<br />
-
-## Import - CSS
+### Import - CSS
 
 All variables (including colors):
 
@@ -77,9 +77,7 @@ Preflight:
 import '@smastrom/tailwind-variables/preflight.css'
 ```
 
-<br />
-
-## Import - PostCSS
+### Import - PostCSS
 
 If using PostCSS, you can use this package in conjunction with [postcss-jit-props](https://github.com/GoogleChromeLabs/postcss-jit-props) to strip any unused variable from the final CSS:
 
@@ -87,9 +85,7 @@ If using PostCSS, you can use this package in conjunction with [postcss-jit-prop
 pnpm add -D postcss postcss-jit-props
 ```
 
-### Nuxt 3
-
-**nuxt.config.ts**
+#### Nuxt 3 - nuxt.config.ts
 
 ```ts
 import { twVariables } from '@smastrom/tailwind-variables'
@@ -105,9 +101,7 @@ export default defineNuxtConfig({
 })
 ```
 
-### Any other framework
-
-**postcss.config.cjs**
+#### Any other framework - postcss.config.cjs
 
 ```js
 const postcssJitProps = require('postcss-jit-props')
