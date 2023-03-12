@@ -1,4 +1,4 @@
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/vue-use-active-scroll/tests.yml?branch=main&label=build) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/vue-use-active-scroll/tests.yml?branch=main&label=tests) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/vue-use-active-scroll/tests.yml?branch=main&label=checks) ![npm](https://img.shields.io/npm/dt/tw-variables)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/vue-use-active-scroll/tests.yml?branch=main&label=build) ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/smastrom/vue-use-active-scroll/tests.yml?branch=main&label=checks)
 
 # Tailwind Variables
 
@@ -11,31 +11,46 @@
 All variables including colors:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/variables.css" />
+<link
+   rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/@smastrom/tailwind-variables/dist/variables.css"
+/>
 ```
 
 One or more subsets:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/colors.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/size.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/sky.css" />
+<link
+   rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/@smastrom/tailwind-variables/dist/colors.css"
+/>
+<link
+   rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/@smastrom/tailwind-variables/dist/size.css"
+/>
+<link
+   rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/@smastrom/tailwind-variables/dist/sky.css"
+/>
 ```
 
 Preflight:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-variables/dist/preflight.css" />
+<link
+   rel="stylesheet"
+   href="https://cdn.jsdelivr.net/npm/@smastrom/tailwind-variables/dist/preflight.css"
+/>
 ```
 
-Pick any import on jsDelivr: [Link](https://www.jsdelivr.com/package/npm/tw-variables?tab=files&path=dist)
+Pick any import on jsDelivr: [Link](https://www.jsdelivr.com/package/npm/@smastrom/tailwind-variables?tab=files&path=dist)
 
 <br />
 
 ## Installation
 
 ```bash
-pnpm install -D tw-variables
+pnpm install -D @smastrom/tailwind-variables
 ```
 
 <br />
@@ -45,21 +60,21 @@ pnpm install -D tw-variables
 All variables (including colors):
 
 ```js
-import 'tw-variables/variables.css'
+import '@smastrom/tailwind-variables/variables.css'
 ```
 
 One or more subsets:
 
 ```js
-import 'tw-variables/colors.css'
-import 'tw-variables/size.css'
-import 'tw-variables/green.css'
+import '@smastrom/tailwind-variables/colors.css'
+import '@smastrom/tailwind-variables/size.css'
+import '@smastrom/tailwind-variables/green.css'
 ```
 
 Preflight:
 
 ```js
-import 'tw-variables/preflight.css'
+import '@smastrom/tailwind-variables/preflight.css'
 ```
 
 <br />
@@ -77,7 +92,7 @@ pnpm add -D postcss postcss-jit-props
 **nuxt.config.ts**
 
 ```ts
-import { twVariables } from 'tw-variables'
+import { twVariables } from '@smastrom/tailwind-variables'
 
 export default defineNuxtConfig({
    build: {
@@ -96,7 +111,7 @@ export default defineNuxtConfig({
 
 ```js
 const postcssJitProps = require('postcss-jit-props')
-const twVariables = require('tw-variables')
+const twVariables = require('@smastrom/tailwind-variables')
 
 module.exports = {
    plugins: [postcssJitProps(twVariables)],
@@ -131,25 +146,25 @@ module.exports = {
 
 ## Subsets
 
-| Name                       | Prefix                   | Import                            | Reference                                                       |
-| -------------------------- | ------------------------ | --------------------------------- | --------------------------------------------------------------- |
-| `blur`                     | `--blur-`                | `tw-variables/blur.css`           | [Link](https://tailwindcss.com/docs/blur)                       |
-| `borderRadius`             | `--radius-`              | `tw-variables/border-radius.css`  | [Link](https://tailwindcss.com/docs/border-radius)              |
-| `borderWidth`              | `--border-`              | `tw-variables/border-width.css`   | [Link](https://tailwindcss.com/docs/border-width)               |
-| `boxShadow`                | `--shadow-`              | `tw-variables/box-shadow.css`     | [Link](https://tailwindcss.com/docs/box-shadow)                 |
-| `colors`                   | `--blue-`, `--slate-`... | `tw-variables/colors.css`         | [Link](https://tailwindcss.com/docs/customizing-colors)         |
-| `dropShadow`               | `--drop-`                | `tw-variables/drop-shadow.css`    | [Link](https://tailwindcss.com/docs/drop-shadow)                |
-| `fontWeight`               | `--font-`                | `tw-variables/font-weight.css`    | [Link](https://tailwindcss.com/docs/font-weight)                |
-| `fontFamily`               | `--family-`              | `tw-variables/font-family.css`    | [Link](https://tailwindcss.com/docs/font-family)                |
-| `fontSize`                 | `--text-`                | `tw-variables/font-size.css`      | [Link](https://tailwindcss.com/docs/font-size)                  |
-| `letterSpacing`            | `--tracking-`            | `tw-variables/letter-spacing.css` | [Link](https://tailwindcss.com/docs/letter-spacing)             |
-| `lineHeight`               | `--leading-`             | `tw-variables/line-height.css`    | [Link](https://tailwindcss.com/docs/line-height)                |
-| `opacity`                  | `--opacity-`             | `tw-variables/opacity.css`        | [Link](https://tailwindcss.com/docs/opacity)                    |
-| `maxWidth`                 | `--width-`               | `tw-variables/width.css`          | [Link](https://tailwindcss.com/docs/max-width)                  |
-| `screens`                  | `--screen-`              | `tw-variables/screen.css`         | [Link](https://tailwindcss.com/docs/theme#screens)              |
-| `spacing`                  | `--size-`                | `tw-variables/size.css`           | [Link](https://tailwindcss.com/docs/padding)                    |
-| `transitionTimingFunction` | `--easing-`              | `tw-variables/easing.css`         | [Link](https://tailwindcss.com/docs/transition-timing-function) |
-| `zIndex`                   | `--z-`                   | `tw-variables/z-index.css`        | [Link](https://tailwindcss.com/docs/z-index)                    |
+| Name                       | Prefix                   | Import                                            | Reference                                                       |
+| -------------------------- | ------------------------ | ------------------------------------------------- | --------------------------------------------------------------- |
+| `blur`                     | `--blur-`                | `@smastrom/tailwind-variables/blur.css`           | [Link](https://tailwindcss.com/docs/blur)                       |
+| `borderRadius`             | `--radius-`              | `@smastrom/tailwind-variables/border-radius.css`  | [Link](https://tailwindcss.com/docs/border-radius)              |
+| `borderWidth`              | `--border-`              | `@smastrom/tailwind-variables/border-width.css`   | [Link](https://tailwindcss.com/docs/border-width)               |
+| `boxShadow`                | `--shadow-`              | `@smastrom/tailwind-variables/box-shadow.css`     | [Link](https://tailwindcss.com/docs/box-shadow)                 |
+| `colors`                   | `--blue-`, `--slate-`... | `@smastrom/tailwind-variables/colors.css`         | [Link](https://tailwindcss.com/docs/customizing-colors)         |
+| `dropShadow`               | `--drop-`                | `@smastrom/tailwind-variables/drop-shadow.css`    | [Link](https://tailwindcss.com/docs/drop-shadow)                |
+| `fontWeight`               | `--font-`                | `@smastrom/tailwind-variables/font-weight.css`    | [Link](https://tailwindcss.com/docs/font-weight)                |
+| `fontFamily`               | `--family-`              | `@smastrom/tailwind-variables/font-family.css`    | [Link](https://tailwindcss.com/docs/font-family)                |
+| `fontSize`                 | `--text-`                | `@smastrom/tailwind-variables/font-size.css`      | [Link](https://tailwindcss.com/docs/font-size)                  |
+| `letterSpacing`            | `--tracking-`            | `@smastrom/tailwind-variables/letter-spacing.css` | [Link](https://tailwindcss.com/docs/letter-spacing)             |
+| `lineHeight`               | `--leading-`             | `@smastrom/tailwind-variables/line-height.css`    | [Link](https://tailwindcss.com/docs/line-height)                |
+| `opacity`                  | `--opacity-`             | `@smastrom/tailwind-variables/opacity.css`        | [Link](https://tailwindcss.com/docs/opacity)                    |
+| `maxWidth`                 | `--width-`               | `@smastrom/tailwind-variables/width.css`          | [Link](https://tailwindcss.com/docs/max-width)                  |
+| `screens`                  | `--screen-`              | `@smastrom/tailwind-variables/screen.css`         | [Link](https://tailwindcss.com/docs/theme#screens)              |
+| `spacing`                  | `--size-`                | `@smastrom/tailwind-variables/size.css`           | [Link](https://tailwindcss.com/docs/padding)                    |
+| `transitionTimingFunction` | `--easing-`              | `@smastrom/tailwind-variables/easing.css`         | [Link](https://tailwindcss.com/docs/transition-timing-function) |
+| `zIndex`                   | `--z-`                   | `@smastrom/tailwind-variables/z-index.css`        | [Link](https://tailwindcss.com/docs/z-index)                    |
 
 <br />
 
@@ -157,29 +172,29 @@ module.exports = {
 
 Colors reference: [Link](https://tailwindcss.com/docs/customizing-colors)
 
-| Name      | Prefix       | Import                     |
-| --------- | ------------ | -------------------------- |
-| `amber`   | `--amber-`   | `tw-variables/amber.css`   |
-| `blue`    | `--blue-`    | `tw-variables/blue.css`    |
-| `cyan`    | `--cyan-`    | `tw-variables/cyan.css`    |
-| `emerald` | `--emerald-` | `tw-variables/emerald.css` |
-| `fuchsia` | `--fuchsia-` | `tw-variables/fuchsia.css` |
-| `gray`    | `--gray-`    | `tw-variables/gray.css`    |
-| `green`   | `--green-`   | `tw-variables/green.css`   |
-| `indigo`  | `--indigo-`  | `tw-variables/indigo.css`  |
-| `lime`    | `--lime-`    | `tw-variables/lime.css`    |
-| `neutral` | `--neutral-` | `tw-variables/neutral.css` |
-| `orange`  | `--orange-`  | `tw-variables/orange.css`  |
-| `pink`    | `--pink-`    | `tw-variables/pink.css`    |
-| `purple`  | `--purple-`  | `tw-variables/purple.css`  |
-| `red`     | `--red-`     | `tw-variables/red.css`     |
-| `rose`    | `--rose-`    | `tw-variables/rose.css`    |
-| `slate`   | `--slate-`   | `tw-variables/slate.css`   |
-| `sky`     | `--sky-`     | `tw-variables/sky.css`     |
-| `teal`    | `--teal-`    | `tw-variables/teal.css`    |
-| `violet`  | `--violet-`  | `tw-variables/violet.css`  |
-| `yellow`  | `--yellow-`  | `tw-variables/yellow.css`  |
-| `zinc`    | `--zinc-`    | `tw-variables/zinc.css`    |
+| Name      | Prefix       | Import                                     |
+| --------- | ------------ | ------------------------------------------ |
+| `amber`   | `--amber-`   | `@smastrom/tailwind-variables/amber.css`   |
+| `blue`    | `--blue-`    | `@smastrom/tailwind-variables/blue.css`    |
+| `cyan`    | `--cyan-`    | `@smastrom/tailwind-variables/cyan.css`    |
+| `emerald` | `--emerald-` | `@smastrom/tailwind-variables/emerald.css` |
+| `fuchsia` | `--fuchsia-` | `@smastrom/tailwind-variables/fuchsia.css` |
+| `gray`    | `--gray-`    | `@smastrom/tailwind-variables/gray.css`    |
+| `green`   | `--green-`   | `@smastrom/tailwind-variables/green.css`   |
+| `indigo`  | `--indigo-`  | `@smastrom/tailwind-variables/indigo.css`  |
+| `lime`    | `--lime-`    | `@smastrom/tailwind-variables/lime.css`    |
+| `neutral` | `--neutral-` | `@smastrom/tailwind-variables/neutral.css` |
+| `orange`  | `--orange-`  | `@smastrom/tailwind-variables/orange.css`  |
+| `pink`    | `--pink-`    | `@smastrom/tailwind-variables/pink.css`    |
+| `purple`  | `--purple-`  | `@smastrom/tailwind-variables/purple.css`  |
+| `red`     | `--red-`     | `@smastrom/tailwind-variables/red.css`     |
+| `rose`    | `--rose-`    | `@smastrom/tailwind-variables/rose.css`    |
+| `slate`   | `--slate-`   | `@smastrom/tailwind-variables/slate.css`   |
+| `sky`     | `--sky-`     | `@smastrom/tailwind-variables/sky.css`     |
+| `teal`    | `--teal-`    | `@smastrom/tailwind-variables/teal.css`    |
+| `violet`  | `--violet-`  | `@smastrom/tailwind-variables/violet.css`  |
+| `yellow`  | `--yellow-`  | `@smastrom/tailwind-variables/yellow.css`  |
+| `zinc`    | `--zinc-`    | `@smastrom/tailwind-variables/zinc.css`    |
 
 <br />
 

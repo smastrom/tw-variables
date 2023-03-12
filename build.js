@@ -7,7 +7,7 @@ const configProps = [
    ['blur', 'blur', 'blur'],
    ['borderRadius', 'radius', 'border-radius'],
    ['borderWidth', 'border', 'border-width'],
-   ['boxShadow', 'shadow', 'shadow'],
+   ['boxShadow', 'shadow', 'box-shadow'],
    ['dropShadow', 'drop-shadow', 'drop-shadow'],
    ['fontWeight', 'font', 'font-weight'],
    ['fontFamily', 'family', 'font-family'],
@@ -201,7 +201,6 @@ function cleanPreflight(cssText) {
    return cssText
       .replace(/\/\*[\s\S]*?\*\//g, '') // Remove comments
       .replace(/\b(?:\w+-)*theme\s*\(\s*(?:(?!\)).)*\)/g, '') // Remove properties with theme() fns
-      .replace('--tw-content', 'content') // Replace tw-content
       .replace(/[\s\n]+/g, '') // Minify
 }
 

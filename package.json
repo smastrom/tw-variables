@@ -1,23 +1,24 @@
 {
-   "name": "tw-variables",
+   "name": "@smastrom/tailwind-variables",
    "version": "3.2.7",
    "private": false,
    "description": "400 useful CSS variables generated straight from Tailwind source files.",
    "keywords": [
       "tailwind",
       "tailwindcss",
+      "tailwind-css-variables",
       "tailwind-variables",
       "css",
       "css-variables",
-      "tw-variables"
+      "tailwind-tokens"
    ],
-   "homepage": "https://github.com/smastrom/tw-variables",
+   "homepage": "https://github.com/smastrom/tailwind-variables",
    "bugs": {
-      "url": "https://github.com/smastrom/tw-variables/issues"
+      "url": "https://github.com/smastrom/tailwind-variables/issues"
    },
    "repository": {
       "type": "git",
-      "url": "https://github.com/smastrom/tw-variables.git"
+      "url": "https://github.com/smastrom/tailwind-variables.git"
    },
    "license": "MIT",
    "author": {
@@ -36,7 +37,7 @@
       "./blur.css": "./dist/blur.css",
       "./border-radius.css": "./dist/border-radius.css",
       "./border-width.css": "./dist/border-width.css",
-      "./shadow.css": "./dist/shadow.css",
+      "./box-shadow.css": "./dist/box-shadow.css",
       "./drop-shadow.css": "./dist/drop-shadow.css",
       "./font-weight.css": "./dist/font-weight.css",
       "./font-family.css": "./dist/font-family.css",
@@ -93,6 +94,6 @@
       "bun": "^0.5.7",
       "bun-types": "^0.5.7",
       "prettier": "^2.8.4",
-      "tailwindcss": "3.2.7"
+      "tailwindcss": "^3.2.7"
    }
 }
