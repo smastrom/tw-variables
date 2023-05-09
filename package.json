@@ -1,6 +1,6 @@
 {
    "name": "tw-variables",
-   "version": "3.2.0",
+   "version": "3.3.2",
    "private": false,
    "description": "400 useful, ready-to-import CSS variables generated straight from Tailwind source files.",
    "keywords": [
@@ -83,14 +83,14 @@
    "scripts": {
       "prebuild": "rm -rf dist css && mkdir dist css",
       "build": "bun run build.js",
-      "test": "bun test build.test.js",
+      "postbuild": "bun run test && bun run format",
       "format": "cp -R dist/*.css css && prettier --write css/*",
-      "postbuild": "bun run test && bun run format"
+      "test": "bun test build.test.js"
    },
    "devDependencies": {
-      "bun": "^0.5.7",
+      "bun": "^0.5.9",
       "bun-types": "^0.5.7",
-      "prettier": "^2.8.7",
-      "tailwindcss": "^3.2.7"
+      "prettier": "^2.8.8",
+      "tailwindcss": "^3.3.2"
    }
 }
