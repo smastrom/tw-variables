@@ -1,4 +1,4 @@
-import { theme } from 'tailwindcss/stubs/defaultConfig.stub.js'
+import { theme } from 'tailwindcss/stubs/config.full'
 import twColors from 'tailwindcss/lib/public/colors.js'
 
 const varsMap = new Map()
